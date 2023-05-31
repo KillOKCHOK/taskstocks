@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-//import java.util.Iterator;
 import java.util.List;
 
 class parsedOrder {
@@ -171,7 +170,8 @@ public class Main {
 			}
 		}
 	}
-
+	
+	
 	private static void processOrders(List<parsedUpdate> updatesArr, ArrayList<parsedOrder> ordersArr) {
 		int maxBidPrice = 0;
 		int maxBidPriceIndex = 0;
@@ -254,7 +254,7 @@ public class Main {
 			}
 			// left size of shares with given price
 			else if(l.get(i).startsWith("q,size,")) {
-//				result = result+l.get(i).substring(7, l.get(i).length())+"\n";
+			//	result = result+l.get(i).substring(7, l.get(i).length())+"\n";
 				int queryPrice  = Integer.parseInt(l.get(i).substring(7, l.get(i).length()));
 				for (int j = parsedUpdates.size()-1;j>0; j--) {
 					if(parsedUpdates.get(j).getItemPrice()==queryPrice) {
@@ -284,7 +284,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 
-//		readFileInputStreamReader("./src/input.txt");
+		// readFileInputStreamReader("./src/input.txt");
 		readFileInputStreamReader("./input.txt");
 
 		// Parse Orders
@@ -292,37 +292,18 @@ public class Main {
 
 		// parse Updates
 		parseUpdates(inputArr);
-		////////////////////////////////////////////////////////////////////////////
-//		Iterator<parsedUpdate> updatesIterator0 = parsedUpdates.iterator();
-//		while (updatesIterator0.hasNext()) {
-//			System.out.println(updatesIterator0.next().toString());
-//
-//		}
-//	        	System.out.println("_______________");	 
-		////////////////////////////////////////////////////////////////////////////
-		// Process Orders
+
+		// Process Orders (removes amount of stocks from best bid or ask based on order
 		processOrders(parsedUpdates,parsedOrdersArr);
-		
+
 		// Process queries output
 		processQueries(inputArr);
-		
-		// Create output file
+
+		// Create output file with result
 		createFile("./output.txt");
-		System.out.println(result);
 		
-//		Iterator<parsedOrder> stringIterator = parsedOrdersArr.iterator();
-//		while (stringIterator.hasNext()) {
-//			System.out.println(stringIterator.next().toString());
-//
-//		}
-//	        	System.out.println("________________________");	        	
-//		
-//		Iterator<parsedUpdate> updatesIterator = parsedUpdates.iterator();
-//		while (updatesIterator.hasNext()) {
-//			System.out.println(updatesIterator.next().toString());
-//
-//		}
-//	        	System.out.println("_______________");	        	
+		// Console.log the result
+		System.out.println(result);       	
 		
 	}
 }
